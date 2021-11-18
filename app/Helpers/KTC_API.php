@@ -8,7 +8,7 @@ function format_rupiah($angka)
 }
 
 
-function responserSuccess($variable, $status = 200, $data)
+function responseSuccess($variable, $status = 200, $data)
 {
   return response()->json([
     'message'   => $variable . ' successfully',

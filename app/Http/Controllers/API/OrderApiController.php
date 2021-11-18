@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class OrderApiController extends Controller
 {
@@ -16,6 +17,22 @@ class OrderApiController extends Controller
     public function index()
     {
         //
+        // $min_produktivitas = User::min('id');
+        // $user = User::inRandomOrder()->where('role', 'driver')->where('is_active', '1')->where('is_ready', '1')->first();
+        // $order = Order::with('driver')->get();
+
+        $driver_id = request('driver_id');
+
+        if ($driver_id) {
+            $order = Order::where('driver_id', $driver_id)->where('is_done', '0')->first();
+        }
+
+        return response()->json([
+            'message' => 'Program fetched',
+            'status'    => 200,
+            // 'foods' => $user,
+            'order' => $order,
+        ]);
     }
 
     /**
@@ -30,7 +47,7 @@ class OrderApiController extends Controller
         $order = Order::create([
             'user_id'       => $request->user_id,
             'driver_id'     => $request->driver_id,
-            'type'         => $request->type,
+            'type'          => $request->type,
 
             'lat_jemput'         => $request->lat_jemput,
             'lng_jemput'         => $request->lng_jemput,
@@ -77,5 +94,18 @@ class OrderApiController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    function get_order(Request $request, $id)
+    {
+        $order = Order::find($id);
+        $order->is_get = $request->is_get;
+        $order->save();
+
+        return response()->json([
+            'Message' => 'Order successfully deleted',
+            'status'    => 200,
+            'order'      => $order
+        ]);
     }
 }
