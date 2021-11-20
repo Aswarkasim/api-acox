@@ -46,7 +46,7 @@ Route::group(['middleware'  => ['auth:sanctum']], function () {
 
 
     Route::resource('order', OrderApiController::class);
-    Route::put('order/get_order/{id}', [OrderApiController::class, 'get_order']);
+    // Route::put('order/get_order/{id}', [OrderApiController::class, 'get_order']);
 
 
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -56,3 +56,5 @@ Route::resource('programs', ProgramController::class);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 });
+
+Route::put('order/get_order/{id}', [OrderApiController::class, 'get_order']);
