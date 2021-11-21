@@ -20,18 +20,18 @@ use phpDocumentor\Reflection\Types\Resource_;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware => auth:api'], function () {
+Route::group(['middleware => auth:sanctum'], function () {
 });
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/warungLogin', [AuthController::class, 'warungLogin']);
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::group(['middleware'  => ['auth:api']], function () {
+Route::group(['middleware'  => ['auth:sanctum']], function () {
     Route::get('/profile', function (Request $request) {
         return auth()->user();
     });
@@ -54,5 +54,5 @@ Route::group(['middleware'  => ['auth:api']], function () {
 
 Route::resource('programs', ProgramController::class);
 
-Route::group(['middleware' => ['auth:api']], function () {
+Route::group(['middleware' => ['auth:sanctum']], function () {
 });
