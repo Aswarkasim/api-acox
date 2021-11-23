@@ -50,9 +50,9 @@ Route::group(['middleware'  => ['auth:sanctum']], function () {
 
 
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::resource('programs', ProgramController::class);
 });
 
-Route::resource('programs', ProgramController::class);
 
 // Route::group(['middleware' => ['auth:sanctum']], function () {
 // });
