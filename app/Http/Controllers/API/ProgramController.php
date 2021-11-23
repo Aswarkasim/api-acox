@@ -14,9 +14,12 @@ class ProgramController extends Controller
 
     function index()
     {
-        $data = Program::latest()->get();
+        $program = Program::latest()->get();
         return response()->json([
-            ProgramResource::collection($data), 'Program fetched'
+            'message' => 'Program fetched',
+            'status'    => 200,
+            // 'foods' => $user,
+            'program' => $program,
         ]);
     }
 

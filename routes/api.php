@@ -54,5 +54,5 @@ Route::group(['middleware'  => ['auth:sanctum']], function () {
 
 Route::resource('programs', ProgramController::class);
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-});
+// Route::group(['middleware' => ['auth:sanctum']], function () {
+// });
