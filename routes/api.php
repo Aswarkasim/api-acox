@@ -31,27 +31,27 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/warungLogin', [AuthController::class, 'warungLogin']);
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::group(['middleware'  => ['auth:sanctum']], function () {
-    Route::get('/profile', function (Request $request) {
-        return auth()->user();
-    });
-
-
-    Route::get('user', [UserApiController::class, 'index']);
-
-    Route::resource('foods', FoodApiController::class);
-    Route::get('food/getByUser/{user_id}', [FoodApiController::class, 'getByUser']);
-    Route::post('food/update/{id}', [FoodApiController::class, 'update']);
-    Route::put('food/is_ready/{id}', [FoodApiController::class, 'is_ready']);
-
-
-    Route::resource('order', OrderApiController::class);
-    Route::put('order/get_order/{id}', [OrderApiController::class, 'get_order']);
-
-
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::resource('programs', ProgramController::class);
+// Route::group(['middleware'  => ['auth:sanctum']], function () {
+Route::get('/profile', function (Request $request) {
+    return auth()->user();
 });
+
+
+Route::get('user', [UserApiController::class, 'index']);
+
+Route::resource('foods', FoodApiController::class);
+Route::get('food/getByUser/{user_id}', [FoodApiController::class, 'getByUser']);
+Route::post('food/update/{id}', [FoodApiController::class, 'update']);
+Route::put('food/is_ready/{id}', [FoodApiController::class, 'is_ready']);
+
+
+Route::resource('order', OrderApiController::class);
+Route::put('order/get_order/{id}', [OrderApiController::class, 'get_order']);
+
+
+Route::post('/logout', [AuthController::class, 'logout']);
+Route::resource('programs', ProgramController::class);
+// });
 
 
 // Route::group(['middleware' => ['auth:sanctum']], function () {
