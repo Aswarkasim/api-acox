@@ -51,29 +51,29 @@ class AuthController extends Controller
         // die('masuk');
         if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json([
-                'message'   => 'Unautorized'
+                'message'   => 'Anda tidak terdaftar, silakan registrasi terlebih dahulu'
             ], 401);
         }
 
         $user = User::where('email', $request['email'])->firstOrFail();
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+        // $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'message'           => 'Hi ' . $user->name . ', welcome to home',
             'user'              => $user,
-            'acccess_token'     => $token,
-            'token_type'        => 'Baerer'
+            // 'acccess_token'     => $token,
+            // 'token_type'        => 'Baerer'
         ]);
     }
 
 
-    function logout()
-    {
-        auth()->user()->tokens()->delete();
+    // function logout()
+    // {
+    //     auth()->user()->tokens()->delete();
 
-        return [
-            'message'   => 'You have successfully logged put and token was successfully deleted'
-        ];
-    }
+    //     return [
+    //         'message'   => 'You have successfully logged put and token was successfully deleted'
+    //     ];
+    // }
 }
