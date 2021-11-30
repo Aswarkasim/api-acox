@@ -24,7 +24,7 @@ class OrderApiController extends Controller
         $driver_id = request('driver_id');
 
         if ($driver_id) {
-            $order = Order::with('driver')->where('driver_id', $driver_id)->where('is_done', '0')->first();
+            $order = Order::with('user')->where('driver_id', $driver_id)->where('is_done', '0')->first();
         }
 
         return response()->json([
