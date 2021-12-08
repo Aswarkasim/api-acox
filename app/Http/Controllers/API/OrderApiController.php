@@ -51,9 +51,14 @@ class OrderApiController extends Controller
 
             'lat_jemput'         => $request->lat_jemput,
             'lng_jemput'         => $request->lng_jemput,
+            'desc_jemput'         => $request->desc_jemput,
 
             'lat_tujuan'         => $request->lat_tujuan,
             'lng_tujuan'         => $request->lng_tujuan,
+            'desc_tujuan'         => $request->desc_tujuan,
+
+            'jarak'         => $request->jarak,
+            'harga'         => $request->harga,
 
             'is_done'           => false
 
