@@ -44,9 +44,11 @@ class OrderApiController extends Controller
     public function store(Request $request)
     {
         //
+        $driver = User::inRandomOrder()->where('role', 'driver')->where('is_active', '1')->where('is_ready', '1')->first();
+
         $order = Order::create([
             'user_id'       => $request->user_id,
-            'driver_id'     => $request->driver_id,
+            'driver_id'     => $driver->id,
             'type'          => $request->type,
 
             'lat_jemput'         => $request->lat_jemput,
@@ -64,7 +66,13 @@ class OrderApiController extends Controller
 
         ]);
 
-        return responserSuccess('Order', 200, $order);
+        // return responserSuccess('Order', 200, $order);
+        return response()->json([
+            'message' => 'Successfully',
+            'status'    => 200,
+            // 'foods' => $user,
+            'order' => $order,
+        ]);
     }
 
     /**
