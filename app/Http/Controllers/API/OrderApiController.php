@@ -49,6 +49,10 @@ class OrderApiController extends Controller
         $driver_id = "";
         if ($driver) {
             $driver_id = $driver->id;
+
+            $user = User::find($driver_id);
+            $user->is_ready = 0;
+            $user->save();
         }
         // die($driver);
 
