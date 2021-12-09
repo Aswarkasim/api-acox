@@ -46,7 +46,7 @@ class OrderApiController extends Controller
         //
         $driver = User::inRandomOrder()->where('role', 'driver')->where('is_active', '1')->where('is_ready', '1')->first();
 
-        $driver_id = "";
+        $driver_id = 0;
         if ($driver) {
             $driver_id = $driver->id;
 
@@ -54,7 +54,8 @@ class OrderApiController extends Controller
             $user->is_ready = 0;
             $user->save();
         }
-        // die($driver);
+        // die($driver_id);
+
 
         $order = Order::create([
             'user_id'       => $request->user_id,
