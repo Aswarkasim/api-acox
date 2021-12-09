@@ -44,9 +44,11 @@ Route::get('food/getByUser/{user_id}', [FoodApiController::class, 'getByUser']);
 Route::post('food/update/{id}', [FoodApiController::class, 'update']);
 Route::put('food/is_ready/{id}', [FoodApiController::class, 'is_ready']);
 
-
+Route::get('order/cekOrder', [OrderApiController::class, 'cekOrder']);
 Route::resource('order', OrderApiController::class);
 Route::put('order/get_order/{id}', [OrderApiController::class, 'get_order']);
+
+
 
 
 Route::post('/logout', [AuthController::class, 'logout']);

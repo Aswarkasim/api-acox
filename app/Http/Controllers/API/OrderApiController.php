@@ -23,9 +23,11 @@ class OrderApiController extends Controller
 
         $driver_id = request('driver_id');
 
+        $order = 'Kosong';
         if ($driver_id) {
             $order = Order::with('user')->where('driver_id', $driver_id)->where('is_done', '0')->first();
         }
+
 
         return response()->json([
             'message' => 'Program fetched',
@@ -132,4 +134,26 @@ class OrderApiController extends Controller
             'order'      => $order
         ]);
     }
+
+    public function cekOrder()
+    {
+        // die('masuk');
+        $user_id = request('user_id');
+        $order = Order::where('user_id', $user_id)->where('is_done', '0')->first();
+
+        if ($order) {
+            $available = true;
+        } else {
+            $available = false;
+        }
+        return response()->json([
+            'Message' => 'Order available',
+            'status'    => 200,
+            'available' => $available,
+            'order'      => $order
+        ]);
+    }
 }
+
+// http://api-aco.scrollupstudio.com/api/
+// http://localhost:8000/api/
