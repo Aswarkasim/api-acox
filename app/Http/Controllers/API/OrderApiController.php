@@ -94,9 +94,16 @@ class OrderApiController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($id)
     {
         //
+        $order = Order::with('driver')->first();
+        return response()->json([
+            'message' => 'Program fetched',
+            'status'    => 200,
+            // 'foods' => $user,
+            'order' => $order,
+        ]);
     }
 
     /**
@@ -135,6 +142,7 @@ class OrderApiController extends Controller
         ]);
     }
 
+    //sudah di push = buatmi di androidnya
     public function cekOrder()
     {
         // die('masuk');
