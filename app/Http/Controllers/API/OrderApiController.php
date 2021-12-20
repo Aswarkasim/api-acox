@@ -161,6 +161,20 @@ class OrderApiController extends Controller
             'order'      => $order
         ]);
     }
+
+    public function changeDriver($id)
+    {
+        $driver = User::inRandomOrder()->where('role', 'driver')->where('is_active', '1')->where('is_ready', '1')->first();
+        $order = Order::find($id);
+        $order->driver_id = $driver->id;
+        $order->save();
+
+        return response()->json([
+            'Message' => 'Driver successfully change',
+            'status'    => 200,
+            'order'      => $order
+        ]);
+    }
 }
 
 // http://api-aco.scrollupstudio.com/api/
