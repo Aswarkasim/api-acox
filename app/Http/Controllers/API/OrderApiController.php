@@ -166,14 +166,22 @@ class OrderApiController extends Controller
     {
         $driver = User::inRandomOrder()->where('role', 'driver')->where('is_active', '1')->where('is_ready', '1')->first();
         $order = Order::find($id);
-        $order->driver_id = $driver->id;
-        $order->save();
 
-        return response()->json([
-            'Message' => 'Driver successfully change',
-            'status'    => 200,
-            'order'      => $order
-        ]);
+        if ($order) {
+            $order->driver_id = $driver->id;
+            $order->save();
+            return response()->json([
+                'Message' => 'Driver successfully change',
+                'status'    => 200,
+                'order'      => $order
+            ]);
+        } else {
+
+            return response()->json([
+                'Message' => 'Driver failed change',
+                'status'    => 500
+            ]);
+        }
     }
 }
 
